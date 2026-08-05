@@ -1,42 +1,92 @@
 <h1>ExpNo 1 :Developing AI Agent with PEAS Description</h1>
-<h3>Name: Saravanan N</h3>
-<h3>Register Number/Staff Id: TSML006</h3>
+<h3>Name:  MADHUMITHA R</h3>
+<h3>Register Number: 212224240082</h3>
 
 
-<h3>AIM:</h3>
-<br>
-<p>To find the PEAS description for the given AI problem and develop an AI agent.</p>
-<br>
-<h3>Theory</h3>
-<h3>Medicine prescribing agent:</h3>
-<p>Such this agent prescribes medicine for fever (greater than 98.5 degrees) which we consider here as unhealthy, by the user temperature input, and another environment is rooms in the hospital (two rooms). This agent has to consider two factors one is room location and an unhealthy patient in a random room, the agent has to move from one room to another to check and treat the unhealthy person. The performance of the agent is calculated by incrementing performance and each time after treating in one room again it has to check another room so that the movement causes the agent to reduce its performance. Hence, agents prescribe medicine to unhealthy.</p>
-<hr>
-<h3>PEAS DESCRIPTION:</h3>
-<table>
-  <tr>
-    <td><strong>Agent Type</strong></td>
-    <td><strong>Performance</strong></td>
-     <td><strong>Environment</strong></td>
-    <td><strong>Actuators</strong></td>
-    <td><strong>Sensors</strong></td>
-  </tr>
-    <tr>
-    <td><strong>Medicine prescribing agent</strong></td>
-    <td><strong>Treating unhealthy, agent movement</strong></td>
-     <td><strong>Rooms, Patient</strong></td>
-    <td><strong>Medicine, Treatment</strong></td>
-    <td><strong>Location, Temperature of patient</strong></td>
-  </tr>
-</table>
-<hr>
-<H3>DESIGN STEPS</H3>
-<h3>STEP 1:Identifying the input:</h3>
-<p>Temperature from patients, Location.</p>
-<h3>STEP 2:Identifying the output:</h3>
-<p>Prescribe medicine if the patient in a random has a fever.</p>
-<h3>STEP 3:Developing the PEAS description:</h3>
-<p>PEAS description is developed by the performance, environment, actuators, and sensors in an agent.</p>
-<h3>STEP 4:Implementing the AI agent:</h3>
-<p>Treat unhealthy patients in each room. And check for the unhealthy patients in random room</p>
-<h3>STEP 5:</h3>
-<p>Measure the performance parameters: For each treatment performance incremented, for each movement performance decremented</p>
+# Vacuum Cleaner Agent
+
+## Aim
+To design and implement a simple Vacuum Cleaner Agent using Artificial Intelligence principles and evaluate its performance using the PEAS model.
+
+---
+
+## Theory
+A vacuum cleaner agent is an intelligent agent that cleans dirty areas in its environment. The environment consists of rooms or floor locations, where each location may be clean or dirty. The agent uses sensors to detect dirt, obstacles, its current location, and battery level. Based on the sensor inputs, it decides whether to clean the current location or move to another location. If dirt is detected, the agent activates its vacuum mechanism to clean the area; otherwise, it moves to the next location. The performance of the agent is measured by increasing the performance score for every successfully cleaned location and decreasing it for every unnecessary movement or energy consumption. Thus, the vacuum cleaner agent aims to maximize cleanliness while minimizing movement and energy usage.
+
+---
+
+## PEAS Description
+
+| Agent Type | Performance | Environment | Actuators | Sensors |
+|------------|-------------|-------------|-----------|---------|
+| Vacuum Cleaner Agent | Cleanliness of rooms, minimum time, minimum energy consumption | Rooms, floor, dirt, obstacles | Move (left, right, forward, backward), suck dirt, turn on/off | Dirt sensor, location sensor, obstacle sensor, battery level sensor |
+
+---
+
+## Design Steps
+
+### Step 1: Identifying the Input
+- Dirt status of the current location
+- Current location
+- Obstacle detection
+- Battery level
+
+### Step 2: Identifying the Output
+- Move to the required location and clean the dirty area using the vacuum.
+
+### Step 3: Developing the PEAS Description
+PEAS description is developed by defining the performance measure, environment, actuators, and sensors of the vacuum cleaner agent.
+
+### Step 4: Implementing the AI Agent
+The agent detects dirty locations, moves to those locations, cleans them, avoids obstacles, and continues until all accessible areas are clean.
+
+### Step 5: Performance Measurement
+- Performance increases for every cleaned location.
+- Performance decreases for every movement or unnecessary energy consumption.
+
+---
+
+## Python Implementation
+
+```python
+import random
+
+# Environment (2 Rooms)
+rooms = {
+    "Room A": random.choice(["Clean", "Dirty"]),
+    "Room B": random.choice(["Clean", "Dirty"])
+}
+
+performance = 0
+
+print("Initial Environment")
+for room, status in rooms.items():
+    print(f"{room}: {status}")
+
+print("\nVacuum Cleaner Agent Started...\n")
+
+for room in rooms:
+
+    print(f"Agent moved to {room}")
+    performance -= 1      # Movement cost
+
+    if rooms[room] == "Dirty":
+        print("Sensor: Dirt detected.")
+        print("Action: Cleaning the room...")
+        rooms[room] = "Clean"
+        performance += 10   # Reward for cleaning
+        print("Room cleaned successfully.")
+    else:
+        print("Sensor: Room is already clean.")
+
+    print(f"Current Performance: {performance}\n")
+
+print("Final Environment")
+for room, status in rooms.items():
+    print(f"{room}: {status}")
+
+print("\nFinal Performance:", performance)
+```
+
+## Output:
+<img width="370" height="536" alt="image" src="https://github.com/user-attachments/assets/67c1fe09-6001-485f-aad4-b950770ad439" />
